@@ -1,0 +1,7 @@
+{
+  "name": "heartMobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
