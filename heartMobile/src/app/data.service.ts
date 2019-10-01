@@ -11,7 +11,6 @@ import 'rxjs/add/operator/map';
   providedIn: 'root'
 })
 export class DataService {
-
   constructor(private db: AngularFireDatabase, private afStorage:AngularFireStorage) { }
 
   getFiles(){
@@ -22,19 +21,19 @@ export class DataService {
     });
   }
 
-  uploadToStorage(information): AngularFireUploadTask{
+  uploadToStorage(ideaContent): AngularFireUploadTask{
     // TODO: Generate random user id for different user
-    let newName = '${new Date().getTime()}.txt';
-    return this.afStorage.ref('files/${newName}').putString(information);
+    let date = new Date().getTime();
+    let fileName =  "_" + date
+    return this.afStorage.ref('files/' + fileName).putString(ideaContent);
   }
 
 // Store metadata in realtime database
   storeInfoToDatabase(metainfo){
     let toSave = {
       created: metainfo.timeCreated,
-      url: metainfo.downloadURLs[0],
-      fullpath:metainfo.fullpath,
-      contentType:metainfo.contentType
+      fullpath:metainfo.fullPath,
+      contentType:metainfo.contentType,
     }
     return this.db.list('files').push(toSave);
   }

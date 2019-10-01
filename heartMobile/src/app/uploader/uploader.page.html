@@ -6,7 +6,8 @@
 
 <ion-content class="ion-padding">
   <div class="camera"></div>
-  <ion-button (click)="pickImage()">Pick Image</ion-button>
+  <ion-button (click)="selectImage()">Pick Image</ion-button>
+  <ion-button (click)="takeImage()">Take Photo</ion-button>
 
 
   <ion-card *ngFor="let file of files| async">

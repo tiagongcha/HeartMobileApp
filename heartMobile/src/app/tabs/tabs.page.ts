@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor() {
+    console.log('TODO.TabsPage.constructor');
+  }
+  logout() {
+    console.log('TODO.TabsPage.logout');
+  }
 
 }

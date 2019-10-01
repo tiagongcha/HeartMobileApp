@@ -7,12 +7,12 @@ export const environment = {
   firebase:
   {
     apiKey: "AIzaSyCi5Z5Ij8Zrh7ser_xm87wJWqVOjYIzm2c",
-    authDomain: "heartmobileapp.firebaseapp.com",
-    databaseURL: "https://heartmobileapp.firebaseio.com",
-    projectId: "heartmobileapp",
-    storageBucket: "",
-    messagingSenderId: "335376849565",
-    appId: "1:335376849565:web:17065bb367f8609d681274"
+  authDomain: "heartmobileapp.firebaseapp.com",
+  databaseURL: "https://heartmobileapp.firebaseio.com",
+  projectId: "heartmobileapp",
+  storageBucket: "heartmobileapp.appspot.com",
+  messagingSenderId: "335376849565",
+  appId: "1:335376849565:web:17065bb367f8609d681274"
   }
 };
 

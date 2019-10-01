@@ -19,6 +19,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 
+
 // import firebaseConfig from './firebase';
 
 
