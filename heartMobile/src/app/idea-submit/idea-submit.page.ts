@@ -24,7 +24,8 @@ export class IdeaSubmitPage implements OnInit {
   ideaName:string;
   ideaContent:string;
   fileName:string;
-  showIdeaContent;
+  // showIdeaContent:Boolean=false;
+  hideme=[];
   constructor(
     private alert: AlertController,
     private toastCtrl: ToastController,
@@ -33,11 +34,11 @@ export class IdeaSubmitPage implements OnInit {
     private db: AngularFireDatabase,
     private afStorage:AngularFireStorage)
     {
-      // this.ideaName = "";
-      // this.ideaContent = "";
+      this.ideaName = "";
+      this.ideaContent = "";
       this.fileName = "";
       this.files = this.getFiles();
-      this.showIdeaContent = false;
+      // this.showIdeaContent = false;
     }
 
     getFiles(){
@@ -60,7 +61,8 @@ export class IdeaSubmitPage implements OnInit {
         created: metainfo.timeCreated,
         fullpath:metainfo.fullPath,
         contentType:metainfo.contentType,
-        fileName: this.fileName
+        fileName:this.fileName,
+        fileContent:this.ideaContent
       }
       return this.db.list('files').push(toSave);
     }
@@ -155,10 +157,10 @@ export class IdeaSubmitPage implements OnInit {
     }
 
 
-  viewFile(url){
-      this.showIdeaContent = !this.showIdeaContent;
-      // await this.iab.create(url);
-    }
+  // viewFile(url){
+  //     this.showIdeaContent = !this.showIdeaContent;
+  //     // await this.iab.create(url);
+  //   }
 
 
   ngOnInit() {
