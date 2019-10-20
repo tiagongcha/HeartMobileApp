@@ -9,7 +9,7 @@
 
 		<ion-item>
 		  <ion-label position="floating">Username</ion-label>
-		  <ion-input type="text" [(ngModel)]="username"></ion-input>
+		  <ion-input type="text" [(ngModel)]="email"></ion-input>
 		</ion-item>
 
 		<ion-item>
@@ -18,6 +18,8 @@
 		</ion-item>
 
 	  </ion-list>
+    <ion-button fill="solid" expand="block" color="dark" (click)="loginUser()">User Login</ion-button>
 
-	  <ion-button fill="solid" expand="block" color="dark" (click)="login()">Login</ion-button>
+	  <ion-button fill="solid" expand="block" color="danger" (click)="googleSignIn()">Register With Google</ion-button>
+    <ion-button [routerLink]="['tabs']">Go to detail</ion-button>
 </ion-content>

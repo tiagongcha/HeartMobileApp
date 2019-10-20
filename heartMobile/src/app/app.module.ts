@@ -20,9 +20,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 
 
-// import firebaseConfig from './firebase';
-
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

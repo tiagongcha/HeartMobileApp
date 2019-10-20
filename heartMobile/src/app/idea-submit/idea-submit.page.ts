@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { DataService } from '../data.service';
 import { AlertController} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Observable} from 'rxjs/Rx';
@@ -30,7 +29,6 @@ export class IdeaSubmitPage implements OnInit {
     private alert: AlertController,
     private toastCtrl: ToastController,
     private iab: InAppBrowser,
-    private dataService: DataService,
     private db: AngularFireDatabase,
     private afStorage:AngularFireStorage)
     {
@@ -155,14 +153,6 @@ export class IdeaSubmitPage implements OnInit {
       })
       await alert.present();
     }
-
-
-  // viewFile(url){
-  //     this.showIdeaContent = !this.showIdeaContent;
-  //     // await this.iab.create(url);
-  //   }
-
-
   ngOnInit() {
   }
 
