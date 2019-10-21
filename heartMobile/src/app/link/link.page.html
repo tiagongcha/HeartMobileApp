@@ -22,8 +22,7 @@
           </ion-button>
   
           <div [hidden]="!hideme[i]">
-            <a class="ion-home color-primary item" href="#" onclick="window.open('https://www.youtube.com', '_system', 'location=yes'); return false;"> Click to go to the page</a>
-            
+              <a href={{file.linkContent}}>Click here to go to the page: </a>
             {{file.linkContent}}
           </div>
   

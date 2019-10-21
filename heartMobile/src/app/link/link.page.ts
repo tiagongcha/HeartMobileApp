@@ -7,6 +7,7 @@ import { Observable} from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage,AngularFireUploadTask } from '@angular/fire/storage';
+import { Url } from 'url';
 
 
 @Injectable({
