@@ -37,6 +37,16 @@ const routes: Routes = [
           }
         ]
       },
+      // {
+      //   path: 'link',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: () =>
+      //         import('../link/link.module').then(m => m.LinkPageModule)
+      //     }
+      //   ]
+      // },
       {
         path: '',
         redirectTo: '/tabs/home',

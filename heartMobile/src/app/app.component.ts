@@ -20,6 +20,11 @@ export class AppComponent {
       title:'IdeaSubmit',
       url:'idea-submit',
       icon:'list'
+    },
+    {
+      title:'LinkSubmit',
+      url:'link',
+      icon:'list'
     }
   ];
   constructor(
