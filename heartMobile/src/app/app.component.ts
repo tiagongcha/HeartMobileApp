@@ -31,6 +31,11 @@ export class AppComponent {
       title:'Google Drive',
       url:'drive',
       icon:'done-all'
+    },
+    {
+      title:'LinkSubmit',
+      url:'link',
+      icon:'list'
     }
   ];
   constructor(
