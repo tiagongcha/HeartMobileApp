@@ -38,6 +38,7 @@
     "core-js": "^2.5.4",
     "firebase": "^6.6.1",
     "ionic-angular": "^3.6.1",
+    "ionic-plugin-deeplinks": "^1.0.20",
     "ionic2-calendar": "^0.5.4",
     "rxjs": "~6.5.1",
     "rxjs-compat": "^6.5.3",

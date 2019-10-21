@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage,AngularFireUploadTask } from '@angular/fire/storage';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,8 +24,8 @@ export class LinkPage implements OnInit {
   ideaName:string;
   ideaContent:string;
   linkName:string;
-  // showIdeaContent:Boolean=false;
   hideme=[];
+
   constructor(
     private alert: AlertController,
     private toastCtrl: ToastController,
@@ -79,15 +80,15 @@ export class LinkPage implements OnInit {
 
     async addFile(){
      const alert = await this.alert.create({
-       header: 'Submit new idea',
+       header: 'Submit new link',
        inputs:[
          {
          name: 'ideaTitle',
-         placeholder:'Idea Title'
+         placeholder:'Link Title'
        },
        {
          name:'ideaContent',
-         placeholder:'Idea Content'
+         placeholder:'Link Content'
        }
      ],
 
@@ -118,7 +119,7 @@ export class LinkPage implements OnInit {
           console.log("res: ", res.metadata);
           this.storeInfoToDatabase(res.metadata).then(async ()=>{
             const toast = await this.toastCtrl.create({
-              message:'New File added!',
+              message:'New Link added!',
               duration: 3000
             });
             toast.present();
@@ -129,8 +130,8 @@ export class LinkPage implements OnInit {
     async deleteFiles(file){
       console.log("heree")
       const alert = await this.alert.create({
-        header: 'Confirm Delete Idea',
-        message: 'Are you sure you want to permanently delete this user?',
+        header: 'Confirm Delete Link',
+        message: 'Are you sure you want to permanently delete this link?',
         buttons: [
               {
                 text: 'No',
@@ -143,7 +144,7 @@ export class LinkPage implements OnInit {
                 handler: () => {
                   this.deleteFile(file).subscribe(async () => {
                     const toast = await this.toastCtrl.create({
-                      message:'File Removed!',
+                      message:'Link Removed!',
                       duration: 3000
                     });
                     toast.present();
@@ -154,13 +155,6 @@ export class LinkPage implements OnInit {
       })
       await alert.present();
     }
-
-
-  // viewFile(url){
-  //     this.showIdeaContent = !this.showIdeaContent;
-  //     // await this.iab.create(url);
-  //   }
-
 
   ngOnInit() {
   }
