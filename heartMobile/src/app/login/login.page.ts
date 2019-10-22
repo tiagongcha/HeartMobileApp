@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import {AuthService } from '../services/auth.service'
-// import { NavController } from 'ionic-angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -15,8 +14,10 @@ export class LoginPage implements OnInit {
   email: string = ""
   password: string = ""
 
-  constructor(private afAuth: AngularFireAuth,
-  private router: Router) { }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    public alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -32,20 +33,23 @@ export class LoginPage implements OnInit {
           console.log("user " + token)
       })
   }
+  async presentAlert() {
+      const alert = await this.alertController.create({
+      message: 'wrong username/password',
+      buttons: ['Dismiss']
+     });
+     await alert.present();
+  }
 
+// redirectiont to homepage only happens when user successfully login
 loginUser(){
   const { email, password } = this
-  try{
-			var res = this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      console.log("login success")
-      this.router.navigateByUrl('/tabs');
-  } catch(err){
-    console.dir(err)
-
-    if(err.code == "auth/user-not-found"){
-      console.log("user not found")
-  }
-}
+		var res = this.afAuth.auth.signInWithEmailAndPassword(email, password).then((success)=>{
+        this.router.navigateByUrl('/tabs');
+        console.log("login success")
+      }).catch((err)=>{
+          this.presentAlert();
+      })
 }
 
 
