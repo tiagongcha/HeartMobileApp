@@ -52,8 +52,8 @@ export class LinkPage implements OnInit {
 
     uploadToStorage(ideaContent): AngularFireUploadTask{
       // TODO: Generate random user id for different user
-      let date = new Date().getTime();
-      this.linkName =  this.ideaName + "_" + date
+      //let date = new Date().getTime();
+      this.linkName =  this.ideaName 
       return this.afStorage.ref('links/' + this.linkName).putString(ideaContent);
     }
 
