@@ -10,6 +10,8 @@ const routes: Routes = [
   { path: 'idea-submit', loadChildren: './idea-submit/idea-submit.module#IdeaSubmitPageModule' },
   { path: '', redirectTo: 'login', pathMatch:'full'},
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  { path: 'team-info', loadChildren: './team-info/team-info.module#TeamInfoPageModule' },
+  { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
 ];
 @NgModule({
   imports: [

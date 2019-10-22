@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { map } from 'rxjs/operators';
 import { AlertController} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Observable} from 'rxjs/Rx';
@@ -40,11 +41,11 @@ export class IdeaSubmitPage implements OnInit {
     }
 
     getFiles(){
-      let ref = this.db.list('files');
-      return ref.snapshotChanges()
-      .map(changes => {
+        let ref = this.db.list('files');
+        return ref.snapshotChanges().pipe(map(changes => {
         return changes.map(c => ({key:c.payload.key, ...c.payload.val() }));
-      });
+        })
+      );
     }
 
     uploadToStorage(ideaContent): AngularFireUploadTask{
@@ -153,6 +154,14 @@ export class IdeaSubmitPage implements OnInit {
       })
       await alert.present();
     }
+
+
+  // viewFile(url){
+  //     this.showIdeaContent = !this.showIdeaContent;
+  //     // await this.iab.create(url);
+  //   }
+
+
   ngOnInit() {
   }
 

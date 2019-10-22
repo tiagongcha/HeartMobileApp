@@ -18,12 +18,13 @@ import { environment } from '../environments/environment';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
-
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,
+    CommonModule,
     IonicModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
