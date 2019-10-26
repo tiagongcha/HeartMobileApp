@@ -4,12 +4,32 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Team View</ion-title>
+    <ion-title>Team Overview</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-content >
+  <ion-card *ngIf="isAdmin">
+    <ion-input placeholder="Enter Title" [(ngModel)]="title" class="title"></ion-input>
+    <ion-input placeholder="Enter Team Overview Text" class="input" type="text" [(ngModel)]="content"></ion-input>
+    <ion-button (click) = "upload()">
+      Enter Team Overview
+    </ion-button>
+  </ion-card>
+</ion-content>
+
 <ion-content>
-  <ion-button *ngIf="isAdmin">
-    Create a new Event
-  </ion-button>
+  <ion-card *ngFor="let file of files| async">
+    <ion-card-content>
+      <h2>{{file.title }}</h2>
+
+      <p>
+          {{file.content}}
+      </p>
+      <ion-button fill="outline" expand="block" block icon-only color="danger" (click)="deleteFiles(file)">
+        <ion-icon name="trash"></ion-icon>
+        Delete
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

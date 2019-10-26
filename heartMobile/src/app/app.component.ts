@@ -18,12 +18,12 @@ export class AppComponent {
       icon:'home'
     },
     {
-      title:'IdeaSubmit',
+      title:'Idea Submit',
       url:'idea-submit',
       icon:'list'
     },
     {
-      title:'TeamView',
+      title:'Team Overiew',
       url:'team-info',
       icon:'done-all'
     }
