@@ -51,8 +51,9 @@ export class IdeaSubmitPage implements OnInit {
     uploadToStorage(ideaContent): AngularFireUploadTask{
       // TODO: Generate random user id for different user
       let date = new Date().getTime();
-      this.fileName =  this.ideaName + "_" + date
-      return this.afStorage.ref('files/' + this.fileName).putString(ideaContent);
+      // this.fileName =  this.ideaName + "_" + date
+      this.fileName =  this.ideaName
+      return this.afStorage.ref('files/' + this.fileName).putString(this.ideaContent);
     }
 
     storeInfoToDatabase(metainfo){
@@ -130,7 +131,7 @@ export class IdeaSubmitPage implements OnInit {
       console.log("heree")
       const alert = await this.alert.create({
         header: 'Confirm Delete Idea',
-        message: 'Are you sure you want to permanently delete this user?',
+        message: 'Are you sure you want to permanently delete this idea post?',
         buttons: [
               {
                 text: 'No',
