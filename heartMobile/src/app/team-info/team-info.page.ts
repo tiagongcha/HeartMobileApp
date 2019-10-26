@@ -51,7 +51,7 @@ export class TeamInfoPage implements OnInit {
     );
   }
 
-  upload():AngularFireUploadTask{
+  upload(){
     console.log(this.title);
     console.log(this.content);
     this.storeInfoToDatabase();

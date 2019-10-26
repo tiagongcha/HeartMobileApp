@@ -9,15 +9,6 @@
 </ion-header>
 
 <ion-content >
-  <ion-card *ngIf="isAdmin">
-    <ion-input placeholder="Enter Title" [(ngModel)]="title" class="title"></ion-input>
-    <ion-input placeholder="Enter Team Overview Text" class="input" type="text" [(ngModel)]="content"></ion-input>
-    <ion-button (click) = "upload()">
-      Enter Team Overview
-    </ion-button>
-  </ion-card>
-</ion-content>
-
 <ion-content>
   <ion-card *ngFor="let file of files| async">
     <ion-card-content>
@@ -26,10 +17,19 @@
       <p>
           {{file.content}}
       </p>
-      <ion-button fill="outline" expand="block" block icon-only color="danger" (click)="deleteFiles(file)">
+      <ion-button *ngIf="isAdmin" fill="outline" expand="block" block icon-only color="danger" (click)="deleteFiles(file)">
         <ion-icon name="trash"></ion-icon>
         Delete
       </ion-button>
     </ion-card-content>
   </ion-card>
+</ion-content>
+
+<ion-card *ngIf="isAdmin">
+  <ion-input placeholder="Enter Title" [(ngModel)]="title" class="title"></ion-input>
+  <ion-input placeholder="Enter Team Overview Text" class="input" type="text" [(ngModel)]="content"></ion-input>
+  <ion-button (click) = "upload()">
+    Enter Team Overview
+  </ion-button>
+</ion-card>
 </ion-content>
