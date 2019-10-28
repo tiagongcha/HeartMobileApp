@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import {AngularFirestoreModule} from '@angular/fire/firestore'
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
@@ -32,6 +33,7 @@ import { File } from '@ionic-native/file/ngx';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AppRoutingModule],
   providers: [
     StatusBar,

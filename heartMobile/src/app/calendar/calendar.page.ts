@@ -2,6 +2,7 @@ import { Component,OnInit, ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import {CalendarComponent} from 'ionic2-calendar/calendar';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-tab3',
@@ -31,7 +32,18 @@ export class CalendarPage implements OnInit {
 
   @ViewChild(CalendarComponent, {static: false}) myCal: CalendarComponent;
 
-  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string) { }
+  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string, private db:AngularFirestore,) {
+    this.db.collection('events').snapshotChanges().subscribe(colSnap =>{
+      this.eventSource = [];
+      colSnap.forEach(snap=>{
+        let event:any = snap.payload.doc.data();
+        event.id = snap.payload.doc.id;
+        event.startTime = event.startTime.toDate();
+        event.endTime = event.endTime.toDate();
+        this.eventSource.push(event);
+      });
+    });
+   }
 
   ngOnInit(){
     this.resetEvent();
@@ -51,10 +63,10 @@ export class CalendarPage implements OnInit {
   addEvent(){
       let eventCopy = {
         title: this.event.title,
+        desc: this.event.desc,
         startTime:  new Date(this.event.startTime),
         endTime: new Date(this.event.endTime),
-        allDay: this.event.allDay,
-        desc: this.event.desc
+        allDay: this.event.allDay
       }
 
       if (eventCopy.allDay) {
@@ -63,10 +75,16 @@ export class CalendarPage implements OnInit {
 
         eventCopy.startTime = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()));
         eventCopy.endTime = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate() + 1));
-    }
+      }
     this.eventSource.push(eventCopy);
     this.myCal.loadEvents();
     this.resetEvent();
+    
+    this.db.collection('events').add(eventCopy);
+  }
+
+  deleteEvent(event){
+      this.db.doc(`events/${event.id}`).delete();
   }
 
   changeMode(mode){
@@ -87,17 +105,23 @@ export class CalendarPage implements OnInit {
     this.calendar.currentDate = new Date();
   }
 
-  async onEventSelected(){
-    let start = formatDate(this.event.startTime, 'medium', this.locale);
-    let end = formatDate(this.event.endTime, 'medium', this.locale);
+  async onEventSelected(event){
+    var answer = window.confirm("delete this event?")
+    if (answer) {
+      this.deleteEvent(event);
+    }
+    else {
+      let start = formatDate(this.event.startTime, 'medium', this.locale);
+      let end = formatDate(this.event.endTime, 'medium', this.locale);
 
-    const alert = await this.alertCtrl.create({
-      header: this.event.title,
-      subHeader: this.event.desc,
-      message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: ['OK']
-  });
-    alert.present();
+      const alert = await this.alertCtrl.create({
+        header: this.event.title,
+        subHeader: this.event.desc,
+        message: 'From: ' + start + '<br><br>To: ' + end,
+        buttons: ['OK']
+      });
+      alert.present();
+    }
   }
 
   onViewTitleChanged(title){
@@ -111,3 +135,26 @@ export class CalendarPage implements OnInit {
     this.event.endTime = (selected.toISOString());
   }
 }
+
+// export class CalendarPage {
+
+//   eventSource =[];
+
+//   calendar = {
+//     mode: 'month',
+//     currentDate: new Date(),
+//   }
+
+//   constructor(private db:AngularFirestore,){
+
+//   }
+
+//   addNewEvent(){
+//     let now = new Date();
+//     let event = {
+//       title: 'Event #' + now.getMinutes();
+
+//     }
+//   }
+
+// }
