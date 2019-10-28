@@ -79,7 +79,6 @@ export class CalendarPage implements OnInit {
     this.eventSource.push(eventCopy);
     this.myCal.loadEvents();
     this.resetEvent();
-    
     this.db.collection('events').add(eventCopy);
   }
 
@@ -106,22 +105,26 @@ export class CalendarPage implements OnInit {
   }
 
   async onEventSelected(event){
-    var answer = window.confirm("delete this event?")
-    if (answer) {
-      this.deleteEvent(event);
-    }
-    else {
-      let start = formatDate(this.event.startTime, 'medium', this.locale);
-      let end = formatDate(this.event.endTime, 'medium', this.locale);
-
-      const alert = await this.alertCtrl.create({
-        header: this.event.title,
-        subHeader: this.event.desc,
-        message: 'From: ' + start + '<br><br>To: ' + end,
-        buttons: ['OK']
-      });
-      alert.present();
-    }
+    // var answer = window.confirm("delete this event?")
+    // if (answer) {
+    //   this.deleteEvent(event);
+    // }
+    // else {
+    //   let start = formatDate(this.event.startTime, 'medium', this.locale);
+    //   let end = formatDate(this.event.endTime, 'medium', this.locale);
+    //   const alert = await this.alertCtrl.create({
+    //     header: event.title,
+    //     subHeader: event.desc,
+    //     message: 'From: ' + start + '<br><br>To: ' + end,
+    //     buttons: ['OK']
+    //   });
+    //   alert.present();
+    // }
+      let details =  "Are you sure you want to DELETE the following event?\n"+event.title+"\n"+event.desc+"\n"+"from: "+formatDate(this.event.startTime, 'medium', this.locale)+"\n"+"to: "+formatDate(this.event.endTime, 'medium', this.locale);
+      var answer = window.confirm(details);
+      if(answer){
+        this.deleteEvent(event);
+      }
   }
 
   onViewTitleChanged(title){
@@ -135,26 +138,3 @@ export class CalendarPage implements OnInit {
     this.event.endTime = (selected.toISOString());
   }
 }
-
-// export class CalendarPage {
-
-//   eventSource =[];
-
-//   calendar = {
-//     mode: 'month',
-//     currentDate: new Date(),
-//   }
-
-//   constructor(private db:AngularFirestore,){
-
-//   }
-
-//   addNewEvent(){
-//     let now = new Date();
-//     let event = {
-//       title: 'Event #' + now.getMinutes();
-
-//     }
-//   }
-
-// }
