@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import {AngularFirestoreModule} from '@angular/fire/firestore'
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
@@ -34,6 +35,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AppRoutingModule],
   providers: [
     StatusBar,
