@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { DataService } from '../data.service';
+import { map } from 'rxjs/operators';
 import { AlertController} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Observable} from 'rxjs/Rx';
@@ -30,7 +30,6 @@ export class IdeaSubmitPage implements OnInit {
     private alert: AlertController,
     private toastCtrl: ToastController,
     private iab: InAppBrowser,
-    private dataService: DataService,
     private db: AngularFireDatabase,
     private afStorage:AngularFireStorage)
     {
@@ -42,18 +41,19 @@ export class IdeaSubmitPage implements OnInit {
     }
 
     getFiles(){
-      let ref = this.db.list('files');
-      return ref.snapshotChanges()
-      .map(changes => {
+        let ref = this.db.list('files');
+        return ref.snapshotChanges().pipe(map(changes => {
         return changes.map(c => ({key:c.payload.key, ...c.payload.val() }));
-      });
+        })
+      );
     }
 
     uploadToStorage(ideaContent): AngularFireUploadTask{
       // TODO: Generate random user id for different user
       let date = new Date().getTime();
-      this.fileName =  this.ideaName + "_" + date
-      return this.afStorage.ref('files/' + this.fileName).putString(ideaContent);
+      // this.fileName =  this.ideaName + "_" + date
+      this.fileName =  this.ideaName
+      return this.afStorage.ref('files/' + this.fileName).putString(this.ideaContent);
     }
 
     storeInfoToDatabase(metainfo){
@@ -131,7 +131,7 @@ export class IdeaSubmitPage implements OnInit {
       console.log("heree")
       const alert = await this.alert.create({
         header: 'Confirm Delete Idea',
-        message: 'Are you sure you want to permanently delete this user?',
+        message: 'Are you sure you want to permanently delete this idea post?',
         buttons: [
               {
                 text: 'No',
