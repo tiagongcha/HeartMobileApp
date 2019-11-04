@@ -36,6 +36,11 @@ export class AppComponent {
       title:'LinkSubmit',
       url:'link',
       icon:'list'
+    },
+    {
+      title:'News',
+      url:'news',
+      icon:'list'
     }
   ];
   constructor(

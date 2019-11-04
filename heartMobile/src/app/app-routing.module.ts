@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'idea-submit', loadChildren: './idea-submit/idea-submit.module#IdeaSubmitPageModule' },
   { path: 'link', loadChildren: './link/link.module#LinkPageModule' },
   { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' },
-  { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' }
+  { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' },
+  { path: 'news', loadChildren: './news/news.module#NewsPageModule' }
 ];
 
 @NgModule({
