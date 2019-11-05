@@ -39,7 +39,7 @@ export class AppComponent {
     },
     {
       title:'News',
-      url:'news',
+      url:'posts',
       icon:'list'
     }
   ];

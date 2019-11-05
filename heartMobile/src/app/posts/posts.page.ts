@@ -1,18 +1,18 @@
+import { WordpressService } from './../services/wordpress.service';
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { WordpressService } from './../services/wordpress.service';
-
+ 
 @Component({
-  selector: 'app-news',
-  templateUrl: './news.page.html',
-  styleUrls: ['./news.page.scss'],
+  selector: 'app-posts',
+  templateUrl: './posts.page.html',
+  styleUrls: ['./posts.page.scss'],
 })
-export class NewsPage implements OnInit {
-
+export class PostsPage implements OnInit {
+ 
   posts = [];
   page = 1;
   count = null;
-
+ 
   constructor(private wp: WordpressService, private loadingCtrl: LoadingController) { }
  
   ngOnInit() {
@@ -45,5 +45,5 @@ export class NewsPage implements OnInit {
       }
     });
   }
-
+ 
 }

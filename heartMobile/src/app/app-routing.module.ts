@@ -5,8 +5,6 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'idea-submit', loadChildren: './idea-submit/idea-submit.module#IdeaSubmitPageModule' },
   { path: 'link', loadChildren: './link/link.module#LinkPageModule' },
-  { path: 'news', loadChildren: './news/news.module#NewsPageModule' },
-  { path: 'new', loadChildren: './new/new.module#NewsPageModule' },
   { path: '', redirectTo: 'login', pathMatch:'full'},
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
 
@@ -20,7 +18,9 @@ const routes: Routes = [
   // { path: 'news', loadChildren: './news/news.module#NewsPageModule' }
 
   { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
-  { path: 'new', loadChildren: './new/new.module#NewPageModule' },
+  { path: 'posts', loadChildren: './posts/posts.module#PostsPageModule' },
+  { path: 'posts/:id', loadChildren: './post/post.module#PostPageModule' },
+  { path: 'post', loadChildren: './post/post.module#PostPageModule' },
 ];
 
 @NgModule({
