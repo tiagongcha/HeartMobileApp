@@ -4,33 +4,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngFor="let file of files| async; let i=index">
-    <ion-card-header>
-      {{file.created | date: 'medium'}}
-    </ion-card-header>
+  <ion-content color="primary">
+      <div text-center *ngIf="count">Found {{ count }} posts</div>
+     
+      <ion-card *ngFor="let post of posts">
+        <ion-card-header>
+          <ion-card-title [innerHTML]="post.title.rendered"></ion-card-title>
+          <ion-card-subtitle>{{ post.date_gmt | date }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <img [src]="post.media_url">
+          <div [innerHTML]="post.excerpt.rendered"></div>
+          <!-- <ion-button expand="full" fill="clear" [routerLink]="['/news', post.id]" class="ion-text-right">Read More...</ion-button> -->
+          <ion-button expand="full" fill="clear" href={{post.link}} class="ion-text-right">Read More...</ion-button>
 
-    <ion-card-content>
-      <ion-button fill="outline" size= "default" expand="block"  (click)="hideme[i] = !hideme[i]">
-        <ion-icon name="eye"></ion-icon>
-          <span>{{file.fileName }}</span>
-      </ion-button>
-
-      <div [hidden]="!hideme[i]">
-        content:  {{file.fileContent}}
-      </div>
-
-      <ion-button fill="outline" expand="block" block icon-only color="danger" (click)="deleteFiles(file)">
-        <ion-icon name="trash"></ion-icon>
-        Delete
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-
-
-  <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="addFile()">
-      <ion-icon name="cloud-upload"></ion-icon>
-    </button>
-  </ion-fab>
-</ion-content>
+        </ion-card-content>
+      </ion-card>
+     
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content loadingText="Loading more posts...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+     
+    </ion-content>

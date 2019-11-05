@@ -21,6 +21,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { CommonModule } from '@angular/common';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,7 +34,8 @@ import { CommonModule } from '@angular/common';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AppRoutingModule],
+    AppRoutingModule,
+    HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { DataService } from '../data.service';
+import { map } from 'rxjs/operators';
 import { AlertController} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Observable} from 'rxjs/Rx';
@@ -31,7 +31,6 @@ export class LinkPage implements OnInit {
     private alert: AlertController,
     private toastCtrl: ToastController,
     private iab: InAppBrowser,
-    private dataService: DataService,
     private db: AngularFireDatabase,
     private afStorage:AngularFireStorage)
     {
@@ -44,10 +43,10 @@ export class LinkPage implements OnInit {
 
     getFiles(){
       let ref = this.db.list('links');
-      return ref.snapshotChanges()
-      .map(changes => {
+        return ref.snapshotChanges().pipe(map(changes => {
         return changes.map(c => ({key:c.payload.key, ...c.payload.val() }));
-      });
+        })
+      );
     }
 
     uploadToStorage(ideaContent): AngularFireUploadTask{
