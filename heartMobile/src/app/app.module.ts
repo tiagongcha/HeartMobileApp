@@ -20,10 +20,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { CommonModule } from '@angular/common';
-
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +34,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AppRoutingModule],
+    AppRoutingModule,
+    HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
