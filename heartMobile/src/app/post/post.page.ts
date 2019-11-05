@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
 import { WordpressService } from './../services/wordpress.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+ 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.page.html',
-  styleUrls: ['./new.page.scss'],
+  selector: 'app-post',
+  templateUrl: './post.page.html',
+  styleUrls: ['./post.page.scss'],
 })
-export class NewPage implements OnInit {
-
+export class PostPage implements OnInit {
   post: any;
  
   constructor(private route: ActivatedRoute, private wp: WordpressService) { }
