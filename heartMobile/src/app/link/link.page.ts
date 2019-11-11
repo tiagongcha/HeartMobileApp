@@ -208,7 +208,7 @@ export class LinkPage implements OnInit {
       );
     }
 
-    storeInfoToDatabase(link){
+    storeInfoToDatabase(){
       let toSave = {
         linkName:this.ideaName,
         linkContent:this.ideaContent
@@ -243,8 +243,6 @@ export class LinkPage implements OnInit {
          {
            text: 'Store',
            handler: data =>{
-            //  console.log("idea name: " + data.ideaTitle)
-            //  console.log("idea content: " + data.ideaContent)
              this.ideaName = data.ideaTitle;
              this.ideaContent = data.ideaContent;
              this.uploadInformation(data.ideaContent);
@@ -256,7 +254,7 @@ export class LinkPage implements OnInit {
     }
 
     async uploadInformation(text){
-          this.storeInfoToDatabase(text).then(async ()=>{
+          this.storeInfoToDatabase().then(async ()=>{
             const toast = await this.toastCtrl.create({
               message:'New Link added!',
               duration: 3000
