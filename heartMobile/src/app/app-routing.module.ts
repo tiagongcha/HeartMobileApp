@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'team-info', loadChildren: './team-info/team-info.module#TeamInfoPageModule' },
   { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
+  { path: 'drive', loadChildren: './drive/drive.module#DrivePageModule' },
 ];
 @NgModule({
   imports: [

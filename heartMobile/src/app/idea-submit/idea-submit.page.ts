@@ -24,7 +24,6 @@ export class IdeaSubmitPage implements OnInit {
   ideaName:string;
   ideaContent:string;
   fileName:string;
-  // showIdeaContent:Boolean=false;
   hideme=[];
   constructor(
     private alert: AlertController,
@@ -37,7 +36,6 @@ export class IdeaSubmitPage implements OnInit {
       this.ideaContent = "";
       this.fileName = "";
       this.files = this.getFiles();
-      // this.showIdeaContent = false;
     }
 
     getFiles(){
@@ -49,9 +47,7 @@ export class IdeaSubmitPage implements OnInit {
     }
 
     uploadToStorage(ideaContent): AngularFireUploadTask{
-      // TODO: Generate random user id for different user
       let date = new Date().getTime();
-      // this.fileName =  this.ideaName + "_" + date
       this.fileName =  this.ideaName
       return this.afStorage.ref('files/' + this.fileName).putString(this.ideaContent);
     }
@@ -63,7 +59,7 @@ export class IdeaSubmitPage implements OnInit {
         contentType:metainfo.contentType,
         fileName:this.fileName,
         fileContent:this.ideaContent
-      }
+      }    
       return this.db.list('files').push(toSave);
     }
 
@@ -112,6 +108,16 @@ export class IdeaSubmitPage implements OnInit {
      await alert.present();
     }
 
+    viewFile(path) {
+      var that = this;
+      this.afStorage.ref(path).getDownloadURL().toPromise().then(function(url){
+        that.iab.create(url);
+      }).catch(function(err){
+        console.log(err)
+      });
+
+  }
+
     async uploadInformation(text){
         const upload = this.uploadToStorage(text);
 
@@ -128,7 +134,6 @@ export class IdeaSubmitPage implements OnInit {
     }
 
     async deleteFiles(file){
-      console.log("heree")
       const alert = await this.alert.create({
         header: 'Confirm Delete Idea',
         message: 'Are you sure you want to permanently delete this idea post?',
@@ -155,13 +160,6 @@ export class IdeaSubmitPage implements OnInit {
       })
       await alert.present();
     }
-
-
-  // viewFile(url){
-  //     this.showIdeaContent = !this.showIdeaContent;
-  //     // await this.iab.create(url);
-  //   }
-
 
   ngOnInit() {
   }

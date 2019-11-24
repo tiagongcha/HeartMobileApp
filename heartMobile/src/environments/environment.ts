@@ -15,7 +15,7 @@ export const environment = {
   appId: "1:335376849565:web:17065bb367f8609d681274"
   }
 };
-
+export const GOOGLE_APPLICATION_CREDENTIALS="/Users/gongtia/Downloads/heartmobileapp-firebase-adminsdk-29iu3-f042739572.json"
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

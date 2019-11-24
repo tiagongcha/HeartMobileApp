@@ -9,6 +9,8 @@ import { AngularFireStorage,AngularFireUploadTask } from '@angular/fire/storage'
 import { map } from 'rxjs/operators';
 import { AlertController} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+// import * as admin from 'firebase-admin';
+
 
 @Component({
   selector: 'app-team-info',
@@ -20,13 +22,17 @@ export class TeamInfoPage implements OnInit {
   title:string;
   content:string;
   files: Observable<any[]>;
-
+  admin;
   constructor(
   private alert: AlertController,
   private toastCtrl: ToastController,
   private afStorage:AngularFireStorage,
   private db: AngularFireDatabase
-  ) { this.files = this.getFiles();}
+  ) {
+    this.files = this.getFiles();
+    // this.admin = require('firebase-admin');
+    // var app = admin.initializeApp();
+  }
 
   ngOnInit() {
     firebase.auth().onAuthStateChanged(user => {
@@ -38,6 +44,9 @@ export class TeamInfoPage implements OnInit {
         .then(userProfileSnapshot => {
           this.isAdmin = userProfileSnapshot.data().isAdmin;
           console.log(this.isAdmin)
+          // admin.auth().setCustomUserClaims(user.uid, {
+          //   admin:true
+          // })
         });
     }
   });
