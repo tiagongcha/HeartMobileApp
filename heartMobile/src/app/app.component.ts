@@ -26,13 +26,18 @@ export class AppComponent {
       title:'Team Overiew',
       url:'team-info',
       icon:'done-all'
+    },
+    {
+      title:'Google Drive',
+      url:'drive',
+      icon:'done-all'
     }
   ];
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private router: Router
   ) {
     this.initializeApp();

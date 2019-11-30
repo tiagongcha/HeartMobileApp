@@ -17,16 +17,16 @@ const routes: Routes = [
           }
         ]
       },
-      // {
-      //   path: 'uploader',
-      //   children: [
-      //     {
-      //       path: '',
-      //       loadChildren: () =>
-      //         import('../uploader/uploader.module').then(m => m.UploaderPageModule)
-      //     }
-      //   ]
-      // },
+      {
+        path: 'uploader',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../uploader/uploader.module').then(m => m.UploaderPageModule)
+          }
+        ]
+      },
       {
         path: 'calendar',
         children: [
