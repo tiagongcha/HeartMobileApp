@@ -22,17 +22,17 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  googleSignIn(){
-      const provider = new firebase.auth.GoogleAuthProvider();
-      return this.afAuth.auth.signInWithRedirect(provider)
-        .then(result =>{
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = (<any>result).credential.accessToken;
-          // The signed-in user info.
-          var user = (<any>result).user;
-          console.log("user " + token)
-      })
-  }
+  // googleSignIn(){
+  //     const provider = new firebase.auth.GoogleAuthProvider();
+  //     return this.afAuth.auth.signInWithRedirect(provider)
+  //       .then(result =>{
+  //         // This gives you a Google Access Token. You can use it to access the Google API.
+  //         var token = (<any>result).credential.accessToken;
+  //         // The signed-in user info.
+  //         var user = (<any>result).user;
+  //         console.log("user " + token)
+  //     })
+  // }
   async presentAlert() {
       const alert = await this.alertController.create({
       message: 'wrong username/password',

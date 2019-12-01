@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UploaderPage } from './uploader.page';
+import { FileSizeFormatPipe } from './file-size-format.pipe';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { UploaderPage } from './uploader.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: UploaderPage }])
   ],
-  declarations: [UploaderPage]
+  declarations: [UploaderPage, FileSizeFormatPipe]
 })
 export class UploaderPageModule {}
