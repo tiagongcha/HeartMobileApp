@@ -20,27 +20,27 @@ export class AppComponent {
     {
       title:'Idea Submit',
       url:'idea-submit',
-      icon:'list'
+      icon:"quote"
     },
     {
       title:'Team Overiew',
       url:'team-info',
-      icon:'done-all'
+      icon:"information-circle"
     },
     {
       title:'Google Drive',
       url:'drive',
-      icon:'done-all'
+      icon:"logo-google"
     },
     {
-      title:'LinkSubmit',
+      title:'Useful Links',
       url:'link',
-      icon:'list'
+      icon:"archive"
     },
     {
       title:'News',
       url:'posts',
-      icon:'list'
+      icon:"bonfire"
     }
   ];
   constructor(

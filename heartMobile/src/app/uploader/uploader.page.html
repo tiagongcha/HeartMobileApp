@@ -5,30 +5,48 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card-content *ngFor= "let img of imageFiles">
-    <div>
-      {{image}}
-      <img [src]=img />
-    </div>
+  <ion-card *ngFor= "let img of imageFiles">
+    <ion-card-content>
+      <div>
+        {{image}}
+        <img [src]=img />
+      </div>
+        <a (click)="downloadImage(img)">Download Idea</a>
+    </ion-card-content>
+  </ion-card>
+
+<ion-card *ngFor="let file of files| async">
+  <ion-card-content >
+    {{file.name}}
+    <a (click)="downloadFile(file.name)">Download Idea</a>
   </ion-card-content>
+</ion-card>
+
 </ion-content>
 <!--  first one shows Image upload control -->
 <ion-card text-center *ngIf="!isUploading && !isUploaded">
-    <ion-card-header>
-      <ion-card-title>Choose Images to Upload</ion-card-title>
-    </ion-card-header>
+
     <ion-card-content>
       <div class="fileUpload btn btn-primary">
-        <span>Upload</span>
         <input
           id="uploadBtn"
           type="file"
           class="upload"
-          (change)="uploadFile($event.target.files)"
-        />
+          (change)="uploadFile($event.target.files)"/>
+          <ion-button  class = "uploadButton"[disabled]="!selectedFiles" (click)="uploadMulti()">
+            Upload Image
+          </ion-button>
       </div>
+
+      <div class="uploadFile">
+        <input class="uploadInput" type="file" (change)="detectFiles($event)" multiple>
+        <ion-button  class = "uploadButton"[disabled]="!selectedFiles" (click)="uploadMulti()">
+          Upload Files
+        </ion-button>
+      </div>
+
     </ion-card-content>
-  </ion-card>
+</ion-card>
 
 <!-- The second shows the progress with percentage bar and
 total file size and number of data transferred -->
@@ -88,7 +106,6 @@ total file size and number of data transferred -->
         </div>
         File Size: {{ fileSize | fileSizePipe }}
         <ion-button
-          expand="full"
           color="success"
           (click)="isUploading = isUploaded = false"
           >Upload More</ion-button
@@ -102,24 +119,3 @@ total file size and number of data transferred -->
     </div>
     Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
   </div>
-
-      <label>
-         <input type="file" (change)="detectFiles($event)">
-      </label>
-
-      <button
-              [disabled]="!selectedFiles"
-              (click)="uploadSingle()">
-
-        Upload Single
-      </button>
-
-      <label>
-         <input type="file" (change)="detectFiles($event)" multiple>
-      </label>
-      <button
-              [disabled]="!selectedFiles"
-              (click)="uploadMulti()">
-
-        Upload Multiple
-      </button>

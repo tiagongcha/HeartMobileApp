@@ -35,11 +35,9 @@
         </ion-button>
 
         <ion-fab right bottom >
-          <button ion-fab color="primary" (click)="viewFile(file.fullpath)">
-            <ion-icon name="cloud-upload"></ion-icon>
-          </button>
+          <a (click)="downloadFile(file.fullpath)">Download Idea</a>
         </ion-fab>
-      
+
       </ion-card-content>
     </ion-card>
 </ion-content>

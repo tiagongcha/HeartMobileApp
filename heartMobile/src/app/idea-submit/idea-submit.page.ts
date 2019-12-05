@@ -59,7 +59,7 @@ export class IdeaSubmitPage implements OnInit {
         contentType:metainfo.contentType,
         fileName:this.fileName,
         fileContent:this.ideaContent
-      }    
+      }
       return this.db.list('files').push(toSave);
     }
 
@@ -108,14 +108,14 @@ export class IdeaSubmitPage implements OnInit {
      await alert.present();
     }
 
-    viewFile(path) {
+    downloadFile(path) {
       var that = this;
+      // console.log(path)
       this.afStorage.ref(path).getDownloadURL().toPromise().then(function(url){
         that.iab.create(url);
       }).catch(function(err){
         console.log(err)
       });
-
   }
 
     async uploadInformation(text){

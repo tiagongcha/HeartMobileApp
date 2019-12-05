@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import { Observable} from 'rxjs/Rx';
@@ -9,7 +8,7 @@ import { AngularFireStorage,AngularFireUploadTask } from '@angular/fire/storage'
 import { map } from 'rxjs/operators';
 import { AlertController} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
-// import * as admin from 'firebase-admin';
+import * as firebase from 'firebase/app';
 
 
 @Component({
@@ -22,7 +21,7 @@ export class TeamInfoPage implements OnInit {
   title:string;
   content:string;
   files: Observable<any[]>;
-  admin;
+
   constructor(
   private alert: AlertController,
   private toastCtrl: ToastController,
@@ -30,8 +29,6 @@ export class TeamInfoPage implements OnInit {
   private db: AngularFireDatabase
   ) {
     this.files = this.getFiles();
-    // this.admin = require('firebase-admin');
-    // var app = admin.initializeApp();
   }
 
   ngOnInit() {
@@ -44,9 +41,6 @@ export class TeamInfoPage implements OnInit {
         .then(userProfileSnapshot => {
           this.isAdmin = userProfileSnapshot.data().isAdmin;
           console.log(this.isAdmin)
-          // admin.auth().setCustomUserClaims(user.uid, {
-          //   admin:true
-          // })
         });
     }
   });

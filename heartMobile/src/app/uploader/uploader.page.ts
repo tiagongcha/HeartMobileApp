@@ -4,6 +4,10 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { finalize, tap } from 'rxjs/operators';
 import { AngularFireStorage,AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
+
 import * as firebase from 'firebase/app';
 import * as _ from "lodash";
 
@@ -23,7 +27,9 @@ export class Upload {
   progress:number;
   createdAt: Date = new Date();
 
-  constructor(file:File) {
+
+  constructor(
+    file:File) {
     this.file = file;
   }
 }
@@ -61,6 +67,8 @@ export class UploaderPage {
   //Status check
   isUploading:boolean;
   isUploaded:boolean;
+// file
+  files: Observable<any[]>;
 
   private imageCollection: AngularFirestoreCollection<MyData>;
 
@@ -71,18 +79,21 @@ export class UploaderPage {
 
   constructor(private storage: AngularFireStorage,
     private db: AngularFireDatabase,
-    private database: AngularFirestore) {
+    private database: AngularFirestore,
+    private iab: InAppBrowser,
+    private afStorage:AngularFireStorage) {
     this.isUploading = false;
     this.isUploaded = false;
     //Set collection where our documents/ images info will save
-    this.imageCollection = database.collection<MyData>('freakyImages');
+    this.imageCollection = database.collection<MyData>('shareImages');
     this.images = this.imageCollection.valueChanges();
     this.imageFiles = new Array();
     this.getFiles();
+    this.files = this.listFiles();
   }
-
+// list all image data for display
   private getFiles(){
-    var storageRef = firebase.storage().ref('freakyStorage');
+    var storageRef = firebase.storage().ref('shareStorage');
     storageRef.listAll().then(result=>{
 
       result.items.forEach(imgRef=>{
@@ -95,6 +106,14 @@ export class UploaderPage {
         });
       });
     });
+  }
+// list all file metadata for display
+  listFiles(){
+      let ref = this.db.list('uploads');
+      return ref.snapshotChanges().pipe(map(changes => {
+      return changes.map(c => ({key:c.payload.key, ...c.payload.val() }));
+      })
+    );
   }
 
   pushUpload(upload: Upload) {
@@ -183,10 +202,10 @@ export class UploaderPage {
     this.fileName = file.name;
 
     // The storage path
-    const path = `freakyStorage/${new Date().getTime()}_${file.name}`;
+    const path = `shareStorage/${new Date().getTime()}_${file.name}`;
 
     // Totally optional metadata
-    const customMetadata = { app: 'Freaky Image Upload Demo' };
+    const customMetadata = { app: 'share Image Upload Demo' };
 
     //File reference
     const fileRef = this.storage.ref(path);
@@ -233,6 +252,17 @@ export class UploaderPage {
     });
   }
 
-
+  downloadFile(fileName) {
+    var that = this;
+    this.afStorage.ref('uploads/' + fileName).getDownloadURL().toPromise().then(function(url){
+      that.iab.create(url);
+    }).catch(function(err){
+      console.log("here")
+      console.log(err)
+    });
+}
+  downloadImage(img){
+    this.iab.create(img);
+  }
 
 }
