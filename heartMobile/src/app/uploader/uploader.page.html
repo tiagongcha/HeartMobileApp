@@ -11,14 +11,16 @@
         {{image}}
         <img [src]=img />
       </div>
-        <a (click)="downloadImage(img)">Download Idea</a>
+        <a (click)="downloadImage(img)">Download </a>
     </ion-card-content>
   </ion-card>
 
 <ion-card *ngFor="let file of files| async">
   <ion-card-content >
-    {{file.name}}
-    <a (click)="downloadFile(file.name)">Download Idea</a>
+    <div>
+      {{file.name}}
+    </div>
+    <a (click)="downloadFile(file.name)">Download </a>
   </ion-card-content>
 </ion-card>
 

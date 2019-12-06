@@ -4,16 +4,20 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>ideaSubmit</ion-title>
+    <ion-title>Idea Submission</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
-<div style="padding-top: 20px" class="ion-padding">
+<!-- <div style="padding-top: 20px" class="ion-padding">
   <ion-button expand="block" (click)="addFile()">Submit New Idea</ion-button>
-</div>
+</div> -->
 
   <ion-content class="ion-padding">
+    <ion-card>
+      <img src="https://lh3.googleusercontent.com/YOtG2DiQ2aVXpmmaPC4rNhjLYinoFCaKUGXFb4RwhMsIF8_957XQRroxewCMSG6bLJY">
+    </ion-card>
+
     <ion-card *ngFor="let file of files| async; let i=index">
       <ion-card-header>
         {{file.created | date: 'medium'}}
@@ -40,4 +44,9 @@
 
       </ion-card-content>
     </ion-card>
+    <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="addFile()" >
+        <ion-icon name="add" ></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>

@@ -58,7 +58,7 @@ export class LinkPage implements OnInit {
 
     storeInfoToDatabase(){
       let toSave = {
-        linkName:this.linksTitle,
+        linkTitle:this.linksTitle,
         linkContent:this.linksContent
       }
       return this.db.list('links').push(toSave);
@@ -91,9 +91,9 @@ export class LinkPage implements OnInit {
          {
            text: 'Store',
            handler: data =>{
-             this.linksTitle = data.linksTitle;
-             this.linksContent = data.linksContent;
-             this.uploadInformation(data.linksContent);
+             this.linksTitle = data.linkTitle;
+             this.linksContent = data.linkContent;
+             this.uploadInformation(data.linkContent);
            }
          }
        ]
@@ -105,14 +105,14 @@ export class LinkPage implements OnInit {
           this.storeInfoToDatabase().then(async ()=>{
             const toast = await this.toastCtrl.create({
               message:'New Link added!',
-              duration: 3000
+              duration: 2000
             });
             toast.present();
           });
     }
 
     async deleteFiles(file){
-      console.log("heree")
+      // console.log("heree")
       const alert = await this.alert.create({
         header: 'Confirm Delete Link',
         message: 'Are you sure you want to permanently delete this link?',

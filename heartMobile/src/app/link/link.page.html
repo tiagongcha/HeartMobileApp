@@ -8,25 +8,26 @@
     </ion-toolbar>
   </ion-header>
 
-
+<ion-content>
   <ion-card>
     <img src="https://images.idgesg.net/images/article/2018/05/card_catalog_filing_cabinet_data_repository_library_archive_index_sashkinw_gettyimages_1200x800-100757562-large.jpg">
   </ion-card>
 
     <ion-content class="ion-padding">
       <ion-card *ngFor="let file of links| async; ">
-          <ion-card-header>{{file.linkName }}</ion-card-header>
+          <ion-card-header>{{file.linkTitle }}</ion-card-header>
           <a href={{file.linkContent}}>{{file.linkContent}} </a>
-          <ion-button *ngIf="isAdmin" fill="outline" expand="block" block icon-only color="danger" (click)="deleteFiles(file)">
+          <ion-button *ngIf="isAdmin" fill="outline" expand="block" block icon-only  (click)="deleteFiles(file)">
             <ion-icon name="trash"></ion-icon>
             Delete
           </ion-button>
       </ion-card>
 
 
-      <ion-fab  right bottom>
-        <button *ngIf="isAdmin" ion-fab color="primary" (click)="addFile()">
-          <ion-icon name="cloud-upload"></ion-icon>
-        </button>
+      <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button *ngIf="isAdmin" (click)="addFile()" >
+          <ion-icon name="add" ></ion-icon>
+        </ion-fab-button>
       </ion-fab>
+  </ion-content>
   </ion-content>

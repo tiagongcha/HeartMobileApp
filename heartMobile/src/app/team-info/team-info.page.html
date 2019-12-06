@@ -9,6 +9,10 @@
 </ion-header>
 
 <ion-content >
+  <ion-card>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEe2O2j8mjJB0fU2P61VS8gYoYJrNmz1Z1uoGksyXLxcXCvgBHMA&s">
+  </ion-card>
+
 <ion-content>
   <ion-card *ngFor="let file of files| async">
     <ion-card-content>
@@ -17,7 +21,7 @@
       <p>
           {{file.content}}
       </p>
-      <ion-button *ngIf="isAdmin" fill="outline" expand="block" block icon-only color="danger" (click)="deleteFiles(file)">
+      <ion-button *ngIf="isAdmin" fill="outline" expand="block" block icon-only  (click)="deleteFiles(file)">
         <ion-icon name="trash"></ion-icon>
         Delete
       </ion-button>
