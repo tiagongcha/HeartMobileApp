@@ -84,6 +84,7 @@ export class CalendarPage implements OnInit {
 
   deleteEvent(event){
       this.db.doc(`events/${event.id}`).delete();
+
   }
 
   changeMode(mode){
@@ -103,7 +104,7 @@ export class CalendarPage implements OnInit {
   today(){
     this.calendar.currentDate = new Date();
   }
-
+  
   async onEventSelected(event){
     // var answer = window.confirm("delete this event?")
     // if (answer) {
@@ -125,6 +126,7 @@ export class CalendarPage implements OnInit {
       if(answer){
         this.deleteEvent(event);
       }
+
   }
 
   onViewTitleChanged(title){

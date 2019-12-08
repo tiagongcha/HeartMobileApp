@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { CalendarPage } from './calendar.page';
 import {NgCalendarModule} from 'ionic2-calendar';
 
-
 @NgModule({
   imports: [
     IonicModule,

@@ -8,7 +8,9 @@ import { AngularFireStorage,AngularFireUploadTask } from '@angular/fire/storage'
 import { map } from 'rxjs/operators';
 import { AlertController} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+
 import * as firebase from 'firebase/app';
+
 
 
 @Component({
@@ -27,9 +29,11 @@ export class TeamInfoPage implements OnInit {
   private toastCtrl: ToastController,
   private afStorage:AngularFireStorage,
   private db: AngularFireDatabase
+
   ) {
     this.files = this.getFiles();
   }
+
 
   ngOnInit() {
     firebase.auth().onAuthStateChanged(user => {

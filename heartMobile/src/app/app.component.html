@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div *ngIf = "showSplash" class="splash">
   <div class="spinner"></div>
 </div>
@@ -5,6 +6,11 @@
 <ion-app>
   <!-- <ion-split-pane> -->
     <ion-menu side="start">
+=======
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
       <ion-header>
         <ion-toolbar>
           <ion-title>
@@ -15,6 +21,10 @@
 
       <ion-content padding>
         <ion-list>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
           <ion-menu-toggle *ngFor="let p of appPage">
             <ion-item [routerLink]="p.url" [routerDirection]="'root'">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
@@ -34,5 +44,9 @@
 
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>
+<<<<<<< HEAD
   <!-- </ion-split-pane> -->
+=======
+  </ion-split-pane>
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
 </ion-app>

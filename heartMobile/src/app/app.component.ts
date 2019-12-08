@@ -52,6 +52,7 @@ export class AppComponent {
   ];
 
   showSplash = true;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -62,6 +63,7 @@ export class AppComponent {
   ) {
     translate.setDefaultLang('en');
     this.translate.get('demo.text').subscribe((text: string) => { console.log('HERE: ', text); });
+
     this.initializeApp();
   }
 

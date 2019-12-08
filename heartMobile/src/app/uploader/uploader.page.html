@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+<<<<<<< HEAD
   <ion-card *ngFor= "let img of imageFiles">
     <ion-card-content>
       <div>
@@ -119,3 +120,36 @@ total file size and number of data transferred -->
     </div>
     Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
   </div>
+=======
+  <div class="camera"></div>
+  <ion-button (click)="selectImage()">Pick Image</ion-button>
+  <ion-button (click)="takeImage()">Take Photo</ion-button>
+
+
+  <ion-card *ngFor="let file of files| async">
+    <ion-card-header>
+      {{file.created | date: 'medium'}}
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <button ion-button block icon-left outline (click)="viewFile(file.url)">
+        <ion-icon name="eye"></ion-icon>
+        {{ file.fullPath}}
+      </button>
+
+      <button ion-button block icon-only outline color="danger" (click)="deleteFile(file.url)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="addFile()">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856

@@ -27,6 +27,7 @@ const routes: Routes = [
           }
         ]
       },
+
       {
         path: 'calendar',
         children: [
@@ -47,6 +48,7 @@ const routes: Routes = [
       //     }
       //   ]
       // },
+
       {
         path: '',
         redirectTo: '/tabs/home',

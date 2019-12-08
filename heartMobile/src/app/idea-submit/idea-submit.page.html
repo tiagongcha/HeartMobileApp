@@ -3,7 +3,6 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
     <ion-title>Idea Submit</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +11,6 @@
 <div style="padding-top: 20px" class="ion-padding">
   <ion-button expand="block" (click)="addFile()">Submit New Idea</ion-button>
 </div>
-
   <ion-content class="ion-padding">
     <ion-card *ngFor="let file of files| async; let i=index">
       <ion-card-header>
@@ -33,11 +31,11 @@
           <ion-icon name="trash"></ion-icon>
           Delete
         </ion-button>
-
         <ion-fab right bottom >
           <a (click)="downloadFile(file.fullpath)">Download Idea</a>
         </ion-fab>
 
       </ion-card-content>
     </ion-card>
+
 </ion-content>

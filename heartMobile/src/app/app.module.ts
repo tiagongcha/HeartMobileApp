@@ -25,13 +25,13 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-// import { NavController } from 'ionic-angular';
 
 
 export const APP_ID = 'test-app';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -60,12 +60,12 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     StatusBar,
     SplashScreen,
-    
-    AngularFirestore,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     InAppBrowser,
      Camera,
-     File
+     File,
+     AngularFirestore,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })

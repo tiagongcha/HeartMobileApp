@@ -24,6 +24,7 @@ export class IdeaSubmitPage implements OnInit {
   ideaName:string;
   ideaContent:string;
   fileName:string;
+
   hideme=[];
   constructor(
     private alert: AlertController,

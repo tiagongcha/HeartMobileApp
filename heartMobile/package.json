@@ -13,15 +13,24 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular/common": "^8.1.3",
     "@angular/compiler": "~8.1.2",
     "@angular/core": "^8.1.3",
+=======
+    "@angular/common": "~8.1.2",
+    "@angular/compiler": "~8.1.2",
+    "@angular/core": "~8.1.2",
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
     "@angular/fire": "^5.2.1",
     "@angular/forms": "~8.1.2",
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
+<<<<<<< HEAD
     "@ionic-native/calendar": "^5.15.1",
+=======
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
     "@ionic-native/camera": "^5.14.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file": "^5.14.0",
@@ -29,23 +38,33 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
+<<<<<<< HEAD
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.51",
+=======
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
     "browse": "0.4.0",
     "cordova-android": "^8.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-ios": "5.0.1",
+<<<<<<< HEAD
     "cordova-plugin-calendar": "^5.1.5",
+=======
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-inappbrowser": "^3.1.0",
     "core-js": "^2.5.4",
     "firebase": "^6.6.1",
     "ionic-angular": "^3.6.1",
+<<<<<<< HEAD
     "ionic-plugin-deeplinks": "^1.0.20",
     "ionic2-calendar": "^0.5.7",
+=======
+    "ionic2-calendar": "^0.5.4",
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
     "rxjs": "~6.5.1",
     "rxjs-compat": "^6.5.3",
     "tslib": "^1.9.0",
@@ -94,8 +113,12 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
+<<<<<<< HEAD
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-calendar": {}
+=======
+      "cordova-plugin-ionic-keyboard": {}
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
     },
     "platforms": [
       "ios",
@@ -103,4 +126,8 @@
       "browser"
     ]
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 901ef3209077c425f9ebe01f8f7641d2f639d856
