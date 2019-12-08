@@ -1,0 +1,32 @@
+
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Useful Links</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-card>
+    <img src="https://images.idgesg.net/images/article/2018/05/card_catalog_filing_cabinet_data_repository_library_archive_index_sashkinw_gettyimages_1200x800-100757562-large.jpg">
+  </ion-card>
+
+    <ion-content class="ion-padding">
+      <ion-card *ngFor="let file of links| async; ">
+          <ion-card-header>{{file.linkName }}</ion-card-header>
+          <a href={{file.linkContent}}>{{file.linkContent}} </a>
+          <ion-button *ngIf="isAdmin" fill="outline" expand="block" block icon-only  (click)="deleteFiles(file)">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </ion-button>
+      </ion-card>
+
+
+      <ion-fab  vertical="bottom" horizontal="end">
+        <ion-fab-button *ngIf="isAdmin" (click)="addFile()" >
+          <ion-icon name="add" ></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+  </ion-content>

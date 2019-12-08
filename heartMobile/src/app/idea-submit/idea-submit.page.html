@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Idea Submit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<div style="padding-top: 20px" class="ion-padding">
+  <ion-button expand="block" (click)="addFile()">Submit New Idea</ion-button>
+</div>
+
+  <ion-content class="ion-padding">
+    <ion-card *ngFor="let file of files| async; let i=index">
+      <ion-card-header>
+        {{file.created | date: 'medium'}}
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-button fill="outline" size= "default" expand="block"  (click)="hideme[i] = !hideme[i]">
+          <ion-icon name="eye"></ion-icon>
+            <span>{{file.fileName }}</span>
+        </ion-button>
+
+        <div [hidden]="!hideme[i]">
+            {{file.fileContent}}
+        </div>
+
+        <ion-button fill="outline" expand="block" block icon-only color="danger" (click)="deleteFiles(file)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </ion-button>
+
+        <ion-fab right bottom >
+          <a (click)="downloadFile(file.fullpath)">Download Idea</a>
+        </ion-fab>
+
+      </ion-card-content>
+    </ion-card>
+</ion-content>

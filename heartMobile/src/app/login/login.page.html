@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<img src="https://pbs.twimg.com/profile_images/1169327304914243585/-ZkuJ8yg_400x400.jpg">
+
+<ion-content padding>
+
+	<ion-list>
+
+		<ion-item>
+		  <ion-label position="floating">Username</ion-label>
+		  <ion-input type="text" [(ngModel)]="email"></ion-input>
+		</ion-item>
+
+		<ion-item>
+		  <ion-label position="floating">Password</ion-label>
+		  <ion-input type="password" [(ngModel)]="password"></ion-input>
+		</ion-item>
+    <br/>
+	  </ion-list>
+    <ion-button fill="solid" expand="block" color="dark" (click)="loginUser()">User Login</ion-button>
+    <br/>
+    <br/>
+	  <!-- <ion-button fill="solid" expand="block" color="danger" (click)="googleSignIn()">Register With Google</ion-button> -->
+</ion-content>
