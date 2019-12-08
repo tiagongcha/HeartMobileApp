@@ -14,10 +14,6 @@ const routes: Routes = [
   { path: 'idea-submit', loadChildren: './idea-submit/idea-submit.module#IdeaSubmitPageModule' },
   { path: 'link', loadChildren: './link/link.module#LinkPageModule' },
   { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' },
-  // { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' },
-  // { path: 'news', loadChildren: './news/news.module#NewsPageModule' }
-
-  // { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
   { path: 'posts', loadChildren: './posts/posts.module#PostsPageModule' },
   { path: 'posts/:id', loadChildren: './post/post.module#PostPageModule' },
   { path: 'post', loadChildren: './post/post.module#PostPageModule' },

@@ -42,6 +42,11 @@ export class AppComponent {
       title:'News',
       url:'posts',
       icon:"bonfire"
+    },
+    {
+      title:'Chat',
+      url:'chat',
+      icon:"bonfire"
     }
   ];
 
