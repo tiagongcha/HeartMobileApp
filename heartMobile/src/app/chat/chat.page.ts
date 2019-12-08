@@ -1,6 +1,7 @@
-import { NavController, NavParams, Nav} from 'ionic-angular';
+import { Content, Nav} from 'ionic-angular';
 import { Component, OnInit, ViewChild} from '@angular/core';
 import * as firebase from 'firebase/app';
+import { IonContent } from "@ionic/angular";
 
 @Component({
   selector: 'app-chat',
@@ -21,10 +22,11 @@ export class ChatPage implements OnInit {
   nickname:string;
   chats = [];
   offStatus:boolean = false;
-  @ViewChild('content',{static: false}) private content: any; //not sure
+  //@ViewChild('content',{static: false}) private content: any;
   @ViewChild(Nav, {static: false}) nav: Nav;
+  //@ViewChild(Content,{static: false}) content: Content;
+  @ViewChild(IonContent,{static: false}) content: IonContent;
 
-  //not sure if this func will work
   snapshotToArray(snapshot) {
     var returnArr = [];
     snapshot.forEach(function(childSnapshot) {
@@ -37,8 +39,11 @@ export class ChatPage implements OnInit {
 
   constructor() {
     // this.roomkey = this.navParams.get("key") as string;
-    // this.nickname = this.navParams.get("nickname") as string;
-    this.roomkey = "roomkey";
+    // this.nickname = this.navParams.get("nickname") as string; 
+    //navController and nacParams not working somtimes, try to avoid to use these two
+    this.roomkey = "roomkey"; 
+    // only 1 chat room for the whole heart center 
+    // if need more than 1 room, need to add page
     this.nickname = firebase.auth().currentUser.email;
 
     this.data.type = 'message';
@@ -51,13 +56,14 @@ export class ChatPage implements OnInit {
     sendDate:Date()
   });
   this.data.message = '';
-
   firebase.database().ref('chatrooms/'+this.roomkey+'/chats').on('value', resp => {
     this.chats = [];
     this.chats = this.snapshotToArray(resp);
     setTimeout(() => {
       if(this.offStatus === false) {
-        this.content.scrollToBottom(300);
+        if (this.content.scrollToBottom){
+          this.content.scrollToBottom(300);
+        }
       }
     }, 1000);
   });
@@ -97,11 +103,13 @@ export class ChatPage implements OnInit {
     // this.navCtrl.setRoot({
     //   nickname:this.nickname
     // }); 
-    // might need to add?
+    // navController fails...
   }
 
   getUsername(){
-    console.log(firebase.auth().currentUser);
     return firebase.auth().currentUser.email;
   }
 }
+
+
+//ref: https://www.djamware.com/post/5a629d9880aca7059c142976/build-ionic-3-angular-5-and-firebase-simple-chat-app

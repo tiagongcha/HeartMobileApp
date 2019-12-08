@@ -7,9 +7,8 @@ const routes: Routes = [
   { path: 'link', loadChildren: './link/link.module#LinkPageModule' },
   { path: '', redirectTo: 'login', pathMatch:'full'},
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-
   { path: 'team-info', loadChildren: './team-info/team-info.module#TeamInfoPageModule' },
-
+  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'drive', loadChildren: './drive/drive.module#DrivePageModule' },
   { path: 'idea-submit', loadChildren: './idea-submit/idea-submit.module#IdeaSubmitPageModule' },
   { path: 'link', loadChildren: './link/link.module#LinkPageModule' },
