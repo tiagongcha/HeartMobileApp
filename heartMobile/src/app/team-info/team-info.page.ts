@@ -55,10 +55,9 @@ export class TeamInfoPage implements OnInit {
   }
 
   upload(){
-    console.log(this.title);
-    console.log(this.content);
+    // console.log(this.title);
+    // console.log(this.content);
     this.storeInfoToDatabase();
-    // return this.afStorage.ref('teamView/' + this.title).putString(this.content);
   }
 
   storeInfoToDatabase(){

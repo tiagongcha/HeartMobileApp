@@ -7,7 +7,6 @@ import { Observable} from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage,AngularFireUploadTask } from '@angular/fire/storage';
-// import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +24,7 @@ export class IdeaSubmitPage implements OnInit {
   ideaContent:string;
   fileName:string;
   hideme=[];
+
   constructor(
     private alert: AlertController,
     private toastCtrl: ToastController,
@@ -110,7 +110,6 @@ export class IdeaSubmitPage implements OnInit {
 
     downloadFile(path) {
       var that = this;
-      // console.log(path)
       this.afStorage.ref(path).getDownloadURL().toPromise().then(function(url){
         that.iab.create(url);
       }).catch(function(err){
@@ -122,11 +121,10 @@ export class IdeaSubmitPage implements OnInit {
         const upload = this.uploadToStorage(text);
 
         upload.then().then(async res =>{
-          console.log("res: ", res.metadata);
           this.storeInfoToDatabase(res.metadata).then(async ()=>{
             const toast = await this.toastCtrl.create({
               message:'New File added!',
-              duration: 3000
+              duration: 1000
             });
             toast.present();
           });

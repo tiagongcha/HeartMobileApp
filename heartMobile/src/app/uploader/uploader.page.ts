@@ -6,12 +6,14 @@ import { AngularFireStorage,AngularFireUploadTask } from '@angular/fire/storage'
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-
-
 import * as firebase from 'firebase/app';
 import * as _ from "lodash";
 
+// Reference: image upload code is implemented based on the tutorial:
+// https://www.freakyjolly.com/ionic-4-image-upload-with-progress-in-firestore-and-firestorage-tutorial-by-application/
 
+// Reference: file upload code is implemented based on the tutorial:
+// https://angularfirebase.com/lessons/angular-file-uploads-to-firebase-storage/
 export interface MyData {
   name: string;
   filepath: string;
@@ -19,15 +21,12 @@ export interface MyData {
 }
 
 export class Upload {
-
   $key: string;
   file:File;
   name:string;
   url:string;
   progress:number;
   createdAt: Date = new Date();
-
-
   constructor(
     file:File) {
     this.file = file;
@@ -41,38 +40,24 @@ export class Upload {
 })
 
 export class UploaderPage {
-// DISPLAY PHOTO TASK:
   imageFiles=new Array();
-  // imageFiles: [];
-
-// Upload Task
   task: AngularFireUploadTask;
-
-  // Progress in percentage
   percentage: Observable<number>;
-
-  // Snapshot of uploading file
   snapshot: Observable<any>;
-
-  // Uploaded File URL
   UploadedFileURL: Observable<string>;
-
-  //Uploaded Image List
   images: Observable<MyData[]>;
 
-  //File details
   fileName:string;
   fileSize:number;
 
-  //Status check
   isUploading:boolean;
   isUploaded:boolean;
-// file
+
   files: Observable<any[]>;
 
-  private imageCollection: AngularFirestoreCollection<MyData>;
+  imageCollection: AngularFirestoreCollection<MyData>;
 
-  private basePath:string = '/uploads';
+  basePath:string = '/uploads';
   uploads:  Observable<Upload[]>;
   selectedFiles: FileList;
   currentUpload: Upload;
@@ -84,22 +69,19 @@ export class UploaderPage {
     private afStorage:AngularFireStorage) {
     this.isUploading = false;
     this.isUploaded = false;
-    //Set collection where our documents/ images info will save
     this.imageCollection = database.collection<MyData>('shareImages');
     this.images = this.imageCollection.valueChanges();
     this.imageFiles = new Array();
     this.getFiles();
     this.files = this.listFiles();
   }
+
 // list all image data for display
   private getFiles(){
     var storageRef = firebase.storage().ref('shareStorage');
     storageRef.listAll().then(result=>{
-
       result.items.forEach(imgRef=>{
         imgRef.getDownloadURL().then(url=>{
-          // url of an image:
-          console.log(url);
           this.imageFiles.push(url);
         }).catch(err=>{
           console.log("ererr "+err)
@@ -107,6 +89,7 @@ export class UploaderPage {
       });
     });
   }
+
 // list all file metadata for display
   listFiles(){
       let ref = this.db.list('uploads');
@@ -116,21 +99,18 @@ export class UploaderPage {
     );
   }
 
-  pushUpload(upload: Upload) {
+  fileUpload(upload: Upload) {
       let storageRef = firebase.storage().ref();
       let uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) =>  {
-          // upload in progress
           upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         },
         (error) => {
-          // upload failed
           console.log(error)
         },
         () => {
-          // upload success
           upload.url = uploadTask.snapshot.downloadURL
           upload.name = upload.file.name
           this.saveFileData(upload)
@@ -154,13 +134,10 @@ export class UploaderPage {
         .catch(error => console.log(error))
       }
 
-    // Deletes the file details from the realtime db
   private deleteFileData(key: string) {
     return this.db.list(`${this.basePath}/`).remove(key);
   }
 
-  // Firebase files must have unique names in their respective storage dir
-  // So the name serves as a unique key
   private deleteFileStorage(name:string) {
     let storageRef = firebase.storage().ref();
     storageRef.child(`${this.basePath}/${name}`).delete()
@@ -170,58 +147,36 @@ export class UploaderPage {
       this.selectedFiles = event.target.files;
   }
 
-  uploadSingle() {
-    let file = this.selectedFiles.item(0)
-    this.currentUpload = new Upload(file);
-    this.pushUpload(this.currentUpload)
-  }
-
+// Method to upload single/multiple file:
   uploadMulti() {
     let files = this.selectedFiles
     let filesIndex = _.range(files.length)
     _.each(filesIndex, (idx) => {
       this.currentUpload = new Upload(files[idx]);
-      this.pushUpload(this.currentUpload)}
+      this.fileUpload(this.currentUpload)}
     )
   }
 
+// Method to upload images:
   uploadFile(event: FileList) {
-    // The File object
     const file = event.item(0)
 
-    // Validation for Images Only
     if (file.type.split('/')[0] !== 'image') {
-     console.error('unsupported file type :( ')
+     console.error('only supports image')
      return;
     }
-
     this.isUploading = true;
     this.isUploaded = false;
-
-
     this.fileName = file.name;
 
-    // The storage path
     const path = `shareStorage/${new Date().getTime()}_${file.name}`;
+    const imgRef = this.storage.ref(path);
 
-    // Totally optional metadata
-    const customMetadata = { app: 'share Image Upload Demo' };
-
-    //File reference
-    const fileRef = this.storage.ref(path);
-
-    // The main task
-    this.task = this.storage.upload(path, file, { customMetadata });
-
-    // Get file progress percentage
+    this.task = this.storage.upload(path, file);
     this.percentage = this.task.percentageChanges();
-
     this.snapshot = this.task.snapshotChanges().pipe(
-
       finalize(() => {
-        // Get uploaded file storage path
-        this.UploadedFileURL = fileRef.getDownloadURL();
-
+        this.UploadedFileURL = imgRef.getDownloadURL();
         this.UploadedFileURL.subscribe(resp=>{
           this.addImagetoDB({
             name: file.name,
@@ -241,14 +196,11 @@ export class UploaderPage {
   }
 
   addImagetoDB(image: MyData) {
-    //Create an ID for document
     const id = this.database.createId();
-
-    //Set document id with value in database
-    this.imageCollection.doc(id).set(image).then(resp => {
-      console.log(resp);
+    this.imageCollection.doc(id).set(image).then(response => {
+      console.log(response);
     }).catch(error => {
-      console.log("error " + error);
+      console.log("err" + error);
     });
   }
 
@@ -257,7 +209,6 @@ export class UploaderPage {
     this.afStorage.ref('uploads/' + fileName).getDownloadURL().toPromise().then(function(url){
       that.iab.create(url);
     }).catch(function(err){
-      console.log("here")
       console.log(err)
     });
 }
